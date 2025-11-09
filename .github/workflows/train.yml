@@ -1,0 +1,43 @@
+name: Train Model
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  train:
+    runs-on: self-hosted   # or ubuntu-latest if not using your local runner
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Create Google Service Account Key File
+        env:
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          echo "$GOOGLE_SERVICE_ACCOUNT_JSON" > drive-service-key.json
+          echo "✅ Created temporary drive-service-key.json"
+
+      - name: Download dataset
+        run: |
+          python scripts/download_dataset.py
+
+      - name: Train model
+        run: |
+          python scripts/train.py
+
+      - name: Clean up secrets
+        run: |
+          rm -f drive-service-key.json
+          echo "🧹 Cleaned up secret key file"
