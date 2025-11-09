@@ -1,0 +1,11 @@
+﻿{
+  "agentId": 22,
+  "agentName": "DESKTOP-I26EBUG",
+  "poolId": 1,
+  "poolName": "Default",
+  "serverUrl": "https://pipelinesghubeus15.actions.githubusercontent.com/xPFutFjYevr9C54b84OrNSXYFsSCiAlf8sUE0EGNby9luzlfH8/",
+  "gitHubUrl": "https://github.com/Krishna-81189/emotion-classification-gpt2-vs-bert",
+  "workFolder": "_work",
+  "useV2Flow": true,
+  "serverUrlV2": "https://broker.actions.githubusercontent.com/"
+}
